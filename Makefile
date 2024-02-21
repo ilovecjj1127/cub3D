@@ -1,6 +1,6 @@
 # SETUP
 NAME		=	cub3d
-MLX			=	$(MLX_PATH)libmlx.a
+MLX			=	$(MLX_PATH)libmlx42.a
 LIBFT		=	$(LFT_PATH)libft.a
 
 CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
@@ -27,12 +27,7 @@ HEADER_DIR	=	include/
 HEADER		=	$(addprefix $(HEADER_DIR), $(HEADER_FILE))
 
 SRC_FILES	=	main.c \
-				map.c \
-				draw.c \
-				color.c \
-				hooks.c \
-				project.c \
-				error.c
+
 SRC_DIR		=	src/
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 
@@ -46,13 +41,13 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 		cc $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 all: $(NAME)
-
-$(NAME): $(OBJ) $(MLX) $(LIBFT)
+# $(MLX)
+$(NAME): $(OBJ) $(LIBFT)  
 		@echo "\n$(YELLOW)Generating $(NAME) executable...$(DEFAULT)\n"
 		cc $(OBJ) $(CFLAGS) $(LIB_CF) $(MLX_CF) -o $(NAME)
 		@echo "\n$(GREEN)$(NAME) created!$(DEFAULT)\n"
 
-$(MLX): $(MLX_DIR)
+$(MLX): $(MLX_PATH)
 		@echo "\n$(YELLOW)Generating MLX42 ...$(DEFAULT)\n"
 		@cmake $(MLX_DIR) -B $(MLX_PATH)
 		@make -C $(MLX_PATH) -j4
@@ -78,7 +73,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re
 
 # COLORS
 RED		=	\033[1;31m

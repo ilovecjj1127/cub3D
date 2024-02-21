@@ -6,7 +6,7 @@
 /*   By: jiajchen <jiajchen@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/17 17:03:53 by jiajchen      #+#    #+#                 */
-/*   Updated: 2024/02/19 16:28:10 by jiajchen      ########   odam.nl         */
+/*   Updated: 2024/02/21 15:06:17 by jiajchen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@
 # include <MLX42/MLX42.h>
 # include <libft.h>
 
+# define WIDTH 1920
+# define HEIGHT 1082
+# define TILE 30
+
 typedef struct s_texture
 {
 	mlx_image_t	*no;
@@ -34,7 +38,7 @@ typedef struct s_texture
 
 typedef struct s_map
 {
-	char		**map;
+	char		**map2d;
 	int			width;
 	int			height;
 	int			start_x;
@@ -45,11 +49,12 @@ typedef struct s_player
 {
 	int			p_x;
 	int			p_y;
+	float		fov;
 }	t_player;
 
 typedef struct s_ray
 {
-	/* data */
+	double		dist;
 }	t_ray;
 
 
@@ -59,6 +64,8 @@ typedef struct s_cub
 	mlx_image_t	*img;
 	t_player	*ply;
 	t_texture	*tex;
+	t_map		*map;
+	t_ray		*ray;
 }	t_cub;
 
 #endif
