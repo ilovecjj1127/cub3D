@@ -6,7 +6,7 @@
 /*   By: jiajchen <jiajchen@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/17 17:03:53 by jiajchen      #+#    #+#                 */
-/*   Updated: 2024/02/21 15:06:17 by jiajchen      ########   odam.nl         */
+/*   Updated: 2024/02/22 13:18:19 by jiajchen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,15 @@ typedef struct s_player
 {
 	int			p_x;
 	int			p_y;
+	double		p_ang;
 	float		fov;
 }	t_player;
 
 typedef struct s_ray
 {
 	double		dist;
+	double		ang;
+	double		x_
 }	t_ray;
 
 
