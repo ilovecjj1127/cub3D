@@ -6,7 +6,7 @@
 /*   By: jiajchen <jiajchen@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/17 17:03:53 by jiajchen      #+#    #+#                 */
-/*   Updated: 2024/02/24 11:12:53 by jiajchen      ########   odam.nl         */
+/*   Updated: 2024/02/24 15:25:26 by jiajchen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ typedef struct s_ray
 	int			map_y;
 	int			step_x;
 	int			step_y;
-	int			hit;
+	int			side;
+	double		wall_dist;
 }	t_ray;
 
 typedef struct s_cub

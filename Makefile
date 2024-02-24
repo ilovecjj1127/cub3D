@@ -41,8 +41,8 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 		cc $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 all: $(NAME)
-# $(MLX)
-$(NAME): $(OBJ) $(LIBFT)  
+
+$(NAME): $(OBJ) $(LIBFT) $(MLX)
 		@echo "\n$(YELLOW)Generating $(NAME) executable...$(DEFAULT)\n"
 		cc $(OBJ) $(CFLAGS) $(LIB_CF) $(MLX_CF) -o $(NAME)
 		@echo "\n$(GREEN)$(NAME) created!$(DEFAULT)\n"

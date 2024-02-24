@@ -6,7 +6,7 @@
 /*   By: jiajchen <jiajchen@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/19 12:48:15 by jiajchen      #+#    #+#                 */
-/*   Updated: 2024/02/24 10:39:43 by jiajchen      ########   odam.nl         */
+/*   Updated: 2024/02/24 11:37:30 by jiajchen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	game_loop(void *param)
 
 	cub = param;
 	mlx_delete_image(cub->mlx, cub->img);
-	cub->img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
+	cub->img = mlx_new_image(cub->mlx, WIDTH, HEIGHT / 2);
 	cast_ray(cub);
 	mlx_image_to_window(cub->mlx, cub->img, 0, 0);
 }
