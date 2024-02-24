@@ -6,37 +6,13 @@
 /*   By: jiajchen <jiajchen@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/19 12:48:15 by jiajchen      #+#    #+#                 */
-/*   Updated: 2024/02/22 13:21:10 by jiajchen      ########   odam.nl         */
+/*   Updated: 2024/02/24 10:39:43 by jiajchen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-float	horizontal_inter(t_cub *cub, float angle)
-{
-	
-}
 
-float	vertical_inter(t_cub *cub, float angle)
-{
-	
-}
-
-void	cast_ray(t_cub *cub)
-{
-	int		ray;
-	double	h_inter;
-	double	v_inter;
-
-	ray = 0;
-	cub->ray->ang = cub->ply->p_ang - (cub->ply->fov) / 2;
-	while (ray < WIDTH)
-	{
-		ray++;
-		render(cub, ray);
-	}
-	(void) cub;
-}
 
 void	game_loop(void *param)
 {

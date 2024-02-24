@@ -6,7 +6,7 @@
 /*   By: jiajchen <jiajchen@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/17 17:03:53 by jiajchen      #+#    #+#                 */
-/*   Updated: 2024/02/22 13:18:19 by jiajchen      ########   odam.nl         */
+/*   Updated: 2024/02/24 11:12:53 by jiajchen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,30 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	int			p_x;
-	int			p_y;
-	double		p_ang;
-	float		fov;
+	double		ply_x;
+	double		ply_y;
+	double		dir_x;
+	double		dir_y;
+	double		plane_x;
+	double		plane_y;
+	
 }	t_player;
 
 typedef struct s_ray
 {
-	double		dist;
-	double		ang;
-	double		x_
+	double		cam_x;
+	double		raydir_x;
+	double		raydir_y;
+	double		sidedt_x;
+	double		sidedt_y;
+	double		deltadt_x;
+	double		deltadt_y;
+	int			map_x;
+	int			map_y;
+	int			step_x;
+	int			step_y;
+	int			hit;
 }	t_ray;
-
 
 typedef struct s_cub
 {
