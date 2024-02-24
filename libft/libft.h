@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   libft.h                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jessie <jessie@student.42.fr>                +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/10/05 12:11:48 by jiajchen      #+#    #+#                 */
-/*   Updated: 2023/12/20 21:33:24 by kkopnev       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   libft.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jcaro <jcaro@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/05 12:11:48 by jiajchen          #+#    #+#             */
+/*   Updated: 2024/02/24 19:48:38 by jcaro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,6 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
-char	*get_next_line(int fd);
+char	*get_next_line(int fd, int free_buffer);
 
 #endif

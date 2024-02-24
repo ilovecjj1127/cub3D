@@ -6,7 +6,7 @@
 /*   By: jcaro <jcaro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 11:55:56 by jcaro             #+#    #+#             */
-/*   Updated: 2024/02/24 18:36:23 by jcaro            ###   ########.fr       */
+/*   Updated: 2024/02/24 19:50:34 by jcaro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,8 @@ int	save_texture(char *line, t_textures *textures)
 		free_array(split_line);
 		return (0);
 	}
+	printf("%d\n", array_size(split_line));
+	free(split_line[0]);
 	free(split_line);
 	return (1);
 }
@@ -164,7 +166,7 @@ int	read_textures(char *file, t_textures *textures)
 	if (fd == -1)
 		return (0);
 	init_textures(textures);
-	line = get_next_line(fd);
+	line = get_next_line(fd, 0);
 	while (line)
 	{
 		if (ft_strlen(line) != 1 && *line != '\n')
@@ -173,12 +175,13 @@ int	read_textures(char *file, t_textures *textures)
 			if (!save_texture(line, textures))
 			{
 				free_texture(textures);
+				get_next_line(fd, 1);
 				close(fd);
 				return (0);
 			}
 		}
 		free(line);
-		line = get_next_line(fd);
+		line = get_next_line(fd, 0);
 	}
 	close(fd);
 	return (1);
