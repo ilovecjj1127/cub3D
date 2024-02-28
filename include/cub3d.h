@@ -6,7 +6,7 @@
 /*   By: jiajchen <jiajchen@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/17 17:03:53 by jiajchen      #+#    #+#                 */
-/*   Updated: 2024/02/24 15:25:26 by jiajchen      ########   odam.nl         */
+/*   Updated: 2024/02/28 11:52:10 by jiajchen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,11 @@ typedef struct s_ray
 	int			step_y;
 	int			side;
 	double		wall_dist;
+	int			line_h;
+	double		draw_start;
+	double		draw_end;
+	double		tex_x;
+	mlx_image_t	*wall_tex;
 }	t_ray;
 
 typedef struct s_cub
@@ -82,5 +87,13 @@ typedef struct s_cub
 	t_map		*map;
 	t_ray		*ray;
 }	t_cub;
+
+/* raycasting */
+void	cast_ray(t_cub *cub);
+
+/* render */
+void	calculate_wall(t_cub *cub, t_ray *ray, int x);
+void	render_wall(t_cub *cub, t_ray *ray, int x);
+int		get_color(t_ray *ray, int y);
 
 #endif

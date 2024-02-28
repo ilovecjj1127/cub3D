@@ -6,22 +6,16 @@
 /*   By: jiajchen <jiajchen@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/19 12:43:13 by jiajchen      #+#    #+#                 */
-/*   Updated: 2024/02/24 16:00:25 by jiajchen      ########   odam.nl         */
+/*   Updated: 2024/02/28 11:52:25 by jiajchen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-		// start_ray(x, game, &calc);
-		// init_dda(game, &calc);
-		// perform_dda(game, &calc);
-		// init_wall_texture(game, &calc);
-		// input_wall_texture(x, game, &calc);
-
 /**
  * check if a wall is hit 
  * @param side which side of the wall is hit
- * 0 is W/E (x-dir) wall; 1 is N/S(y-dirc)
+ * 0 is N/S wall; 1 is W/E
 */
 void	perform_dda(t_cub *cub, t_ray *ray)
 {
@@ -96,7 +90,7 @@ void	cast_ray(t_cub *cub)
 		init_ray(cub->ray, cub->ply, x);
 		init_step(cub->ray, cub->ply);
 		perform_dda(cub, cub->ray);
-		calculate_wall(cub->ray, cub->ply);
-		render_wall(cub, x);
+		calculate_wall(cub, cub->ray, x);
+		render_wall(cub, cub->ray, x);
 	}
 }
