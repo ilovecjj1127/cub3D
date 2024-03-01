@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   move.c                                             :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jiajchen <jiajchen@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2024/02/28 12:12:11 by jiajchen      #+#    #+#                 */
-/*   Updated: 2024/02/28 15:09:56 by jiajchen      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   move.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jessie <jessie@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/28 12:12:11 by jiajchen          #+#    #+#             */
+/*   Updated: 2024/02/29 17:56:09 by jessie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,15 @@
 	draw_player(data);
 */
 
-int	check_wall(char **map, t_player *ply)
+int	check_wall(t_cub *cub, char dir)
 {
-	if (map[(int)ply->ply_x][(int)])
+	char		**map;
+	t_player	*ply;
+
+	map = cub->map->map2d;
+	ply = cub->ply;
+	if (dir == 'W' && map[(int)ply->ply_x + ply->dir_x * ply->speed][(int)ply->ply_y] == '1')
+		return (0);
 }
 
 void	move(void *param)
@@ -34,17 +40,14 @@ void	move(void *param)
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(cub->mlx);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_W))
-		cub->ply->ply_x += 5;
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_A))
-		cub->cam->x_offset += 5;
+		move_up;
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_S))
-		cub->cam->y_offset -= 5;
+		cub->ply->ply_x -= cub->ply->plane_x * cub->ply->speed;
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_A))
+		cub->ply->ply_y += cub->ply->plane_y * cub->ply->speed;
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_D))
-		cub->cam->y_offset += 5;
+		cub->ply->ply_y += cub->ply->plane_y * cub->ply->speed;
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT))
-	{
-		init_camera(cub);
-		cub->cam->iso = 0;
-	}
+		
 }
