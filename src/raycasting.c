@@ -6,7 +6,7 @@
 /*   By: jiajchen <jiajchen@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/19 12:43:13 by jiajchen      #+#    #+#                 */
-/*   Updated: 2024/02/28 11:52:25 by jiajchen      ########   odam.nl         */
+/*   Updated: 2024/03/02 16:01:20 by jiajchen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	perform_dda(t_cub *cub, t_ray *ray)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (cub->map->map2d[ray->map_x][ray->map_y] > '0')
+		if (cub->map->map2d[ray->map_x][ray->map_y] == '1')
 			hit = 1;
 	}
 	if (ray->side == 0)
@@ -90,7 +90,7 @@ void	cast_ray(t_cub *cub)
 		init_ray(cub->ray, cub->ply, x);
 		init_step(cub->ray, cub->ply);
 		perform_dda(cub, cub->ray);
-		calculate_wall(cub, cub->ray, x);
+		calculate_wall(cub, cub->ray);
 		render_wall(cub, cub->ray, x);
 	}
 }

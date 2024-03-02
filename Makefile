@@ -22,11 +22,15 @@ MLX_DIR		=	MLX42/
 MLX_H_PATH 	=	MLX42/include/
 MLX_PATH	=	MLX42/build/
 
-HEADER_FILE	=	fdf.h
+HEADER_FILE	=	cub3d.h
 HEADER_DIR	=	include/
 HEADER		=	$(addprefix $(HEADER_DIR), $(HEADER_FILE))
 
 SRC_FILES	=	main.c \
+				raycasting.c \
+				render.c \
+				move.c \
+				rotate.c
 
 SRC_DIR		=	src/
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
@@ -42,7 +46,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT) $(MLX)
+$(NAME): $(OBJ) $(HEADER) $(LIBFT) $(MLX)
 		@echo "\n$(YELLOW)Generating $(NAME) executable...$(DEFAULT)\n"
 		cc $(OBJ) $(CFLAGS) $(LIB_CF) $(MLX_CF) -o $(NAME)
 		@echo "\n$(GREEN)$(NAME) created!$(DEFAULT)\n"

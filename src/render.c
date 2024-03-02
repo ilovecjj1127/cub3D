@@ -6,7 +6,7 @@
 /*   By: jiajchen <jiajchen@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/24 15:28:53 by jiajchen      #+#    #+#                 */
-/*   Updated: 2024/02/28 11:57:46 by jiajchen      ########   odam.nl         */
+/*   Updated: 2024/03/02 17:12:13 by jiajchen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /**
  * @param tex_x position on the texture
 */
-void	calculate_wall(t_cub *cub, t_ray *ray, int x)
+void	calculate_wall(t_cub *cub, t_ray *ray)
 {
 	double	wall_x;
 	
@@ -37,20 +37,26 @@ void	calculate_wall(t_cub *cub, t_ray *ray, int x)
 	ray->tex_x = (int)(wall_x - floor(wall_x) * (double)TILE);
 }
 
-int	get_color(t_ray *ray, int y)
+/* https://github.com/codam-coding-college/MLX42/blob/200a9e8535644bb23f0c798bd2c6d5869934f92d/src/mlx_put_pixel.c#L15 */
+uint32_t	get_color(t_ray *ray, int y)
 {
-	int				r;
-	int				g;
-	int				b;
-	int				x;
-	mlx_texture_t	*tex;
-
+	mlx_image_t	*tex;
+	uint8_t		*pixel;
+	int			x;
+	// int			r;
+	// int			g;
+	// int			b;
+	// int			a;
+	
 	x = ray->tex_x;
 	tex = ray->wall_tex;
-	r = tex->pixels[(y * tex->width + x) * tex->bytes_per_pixel];
-	g = tex->pixels[(y * tex->width + x) * tex->bytes_per_pixel + 1];
-	b = tex->pixels[(y * tex->width + x) * tex->bytes_per_pixel + 2];
-	return (r << 24 | g << 16 | b << 8 | 255);
+	pixel = &tex->pixels[(y * tex->width + x) * sizeof(int32_t)];
+	// r = pixel[0];
+	// g = pixel[1];
+	// b = pixel[2];
+	// a = pixel[3];
+	printf("%u %u %u %u\n", pixel[0], pixel[1], pixel[2], pixel[3]);
+	return (pixel[0] << 24 | pixel[1] << 16 | pixel[2] << 8 | pixel[3]);
 }
 
 void	render_wall(t_cub *cub, t_ray *ray, int x)
@@ -62,7 +68,7 @@ void	render_wall(t_cub *cub, t_ray *ray, int x)
 
 	y = -1;
 	step = 1.0 * TILE / ray->line_h;
-	tex_pos = (ray->draw_start - ray->raydir_x + ray->line_h / 2) * step;
+	tex_pos = (ray->draw_start - HEIGHT / 2 + ray->line_h / 2) * step;
 	while (++y < HEIGHT)
 	{
 		if (y < ray->draw_start)
@@ -72,8 +78,8 @@ void	render_wall(t_cub *cub, t_ray *ray, int x)
 		else
 		{
 			tex_y = (int)tex_pos & (TILE - 1);
-			mlx_put_pixel(cub->img, x, y, get_color(ray, tex_y));
 			tex_pos += step;
+			mlx_put_pixel(cub->img, x, y, get_color(ray, tex_y));
 		}
 	}
 }

@@ -6,13 +6,11 @@
 /*   By: jiajchen <jiajchen@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/19 12:48:15 by jiajchen      #+#    #+#                 */
-/*   Updated: 2024/02/28 12:13:54 by jiajchen      ########   odam.nl         */
+/*   Updated: 2024/03/02 16:03:03 by jiajchen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
-
-
 
 void	game_loop(void *param)
 {
@@ -20,8 +18,9 @@ void	game_loop(void *param)
 
 	cub = param;
 	mlx_delete_image(cub->mlx, cub->img);
-	cub->img = mlx_new_image(cub->mlx, WIDTH, HEIGHT / 2);
+	cub->img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	cast_ray(cub);
+	move(cub);
 	mlx_image_to_window(cub->mlx, cub->img, 0, 0);
 }
 
@@ -43,9 +42,44 @@ t_map	*init_map()
 	map->map2d[9] = NULL;
 	map->height = 9;
 	map->width = 25;
-	map->start_x = 14;
-	map->start_y = 3;
+	map->start_x = 2;
+	map->start_y = 13;
 	return (map);
+}
+
+void	init_textures(t_cub *cub)
+{
+	mlx_texture_t	*no;
+	mlx_texture_t	*so;
+	mlx_texture_t	*ea;
+	mlx_texture_t	*we;
+
+	no = mlx_load_png("./texture/eagle.png");
+	so = mlx_load_png("./texture/redbrick.png");
+	ea = mlx_load_png("./texture/bluestone.png");
+	we = mlx_load_png("./texture/purplestone.png");
+	cub->tex->no = mlx_texture_to_image(cub->mlx, no);
+	cub->tex->so = mlx_texture_to_image(cub->mlx, so);
+	cub->tex->ea = mlx_texture_to_image(cub->mlx, ea);
+	cub->tex->we = mlx_texture_to_image(cub->mlx, we);
+	mlx_delete_texture(no);
+	mlx_delete_texture(so);
+	mlx_delete_texture(ea);
+	mlx_delete_texture(we);
+	cub->tex->ceil = 0x3288bdff;
+	cub->tex->floor = 0x5e4fa2ff;
+}
+
+void	init_player(t_cub *cub)
+{
+	cub->ply->ply_x = cub->map->start_x + 0.5;
+	cub->ply->ply_y = cub->map->start_y + 0.5;
+	cub->ply->dir_x = -1;
+	cub->ply->dir_y = 0;
+	cub->ply->plane_x = 0;
+	cub->ply->plane_y = 0.66;
+	cub->ply->speed_m = 0.8;
+	cub->ply->speed_r = 0.1;
 }
 
 t_cub	*init_cub(char *file)
@@ -56,11 +90,11 @@ t_cub	*init_cub(char *file)
 	if (!cub.mlx)
 		perror("Initialization failed");
 	cub.map = init_map();
+	cub.tex = ft_calloc(1, sizeof(t_texture));
 	cub.ray = ft_calloc(1, sizeof(t_ray));
 	cub.ply = ft_calloc(1, sizeof(t_player));
-	// cub.ply->p_x = cub.map->start_x * TILE + TILE / 2;
-	// cub.ply->p_y = cub.map->start_y * TILE + TILE / 2;
-	// cub.ply->fov = 60 / 180 * 3.1415926535;
+	init_textures(&cub);
+	init_player(&cub);
 
 	(void) file;
 	return (&cub);
@@ -72,6 +106,7 @@ void	free_cub(t_cub *cub)
 	free(cub->map);
 	free(cub->ray);
 	free(cub->ply);
+	free(cub->tex);
 }
 
 int	main(int argc, char **argv)

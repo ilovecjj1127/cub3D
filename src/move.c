@@ -1,53 +1,75 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   move.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jessie <jessie@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/28 12:12:11 by jiajchen          #+#    #+#             */
-/*   Updated: 2024/02/29 17:56:09 by jessie           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   move.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jessie <jessie@student.42.fr>                +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/02/28 12:12:11 by jiajchen      #+#    #+#                 */
+/*   Updated: 2024/03/02 12:59:55 by jiajchen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-/*
-	controle_angle(data);
-	controle_player(data);
-	draw_ceil_floor(data);
-	draw_map(data, 0);
-	draw_view_angle(data);
-	draw_player(data);
-*/
-
-int	check_wall(t_cub *cub, char dir)
+void	move_forward(t_player *ply, char **map)
 {
-	char		**map;
-	t_player	*ply;
-
-	map = cub->map->map2d;
-	ply = cub->ply;
-	if (dir == 'W' && map[(int)ply->ply_x + ply->dir_x * ply->speed][(int)ply->ply_y] == '1')
-		return (0);
+	if (map[(int)(ply->ply_x + ply->dir_x * ply->speed_m)][(int)ply->ply_y]
+		!= '1')
+		ply->ply_x += ply->dir_x * ply->speed_m;
+	if (map[(int)ply->ply_x][(int)(ply->ply_y + ply->dir_y * ply->speed_m)]
+		!= '1')
+		ply->ply_y += ply->dir_y * ply->speed_m;
 }
 
-void	move(void *param)
+void	move_backward(t_player *ply, char **map)
 {
-	t_cub	*cub;
+	if (map[(int)(ply->ply_x - ply->dir_x * ply->speed_m)][(int)ply->ply_y]
+		!= '1')
+		ply->ply_x -= ply->dir_x * ply->speed_m;
+	if (map[(int)ply->ply_x][(int)(ply->ply_y - ply->dir_y * ply->speed_m)]
+		!= '1')
+		ply->ply_y -= ply->dir_y * ply->speed_m;
+}
 
-	cub = (t_cub *)param;
+void	move_left(t_player *ply, char **map)
+{
+	if (map[(int)(ply->ply_x + ply->plane_x * ply->speed_m)][(int)ply->ply_y]
+		!= '1')
+		ply->ply_x -= ply->plane_x * ply->speed_m;
+	if (map[(int)ply->ply_x][(int)(ply->plane_y + ply->dir_y * ply->speed_m)]
+		!= '1')
+		ply->ply_y -= ply->plane_y * ply->speed_m;
+}
+
+void	move_right(t_player *ply, char **map)
+{
+	if (map[(int)(ply->ply_x - ply->plane_x * ply->speed_m)][(int)ply->ply_y]
+		!= '1')
+		ply->ply_x += ply->plane_x * ply->speed_m;
+	if (map[(int)ply->ply_x][(int)(ply->plane_y - ply->dir_y * ply->speed_m)]
+		!= '1')
+		ply->ply_y += ply->plane_y * ply->speed_m;
+}
+
+/**
+ * <- and ->: look left and right in the maze (rotate)
+ * WASD: move the point of view through the maze
+*/
+void	move(t_cub *cub)
+{
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(cub->mlx);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_W))
-		move_up;
+		move_forward(cub->ply, cub->map->map2d);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_S))
-		cub->ply->ply_x -= cub->ply->plane_x * cub->ply->speed;
+		move_backward(cub->ply, cub->map->map2d);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_A))
-		cub->ply->ply_y += cub->ply->plane_y * cub->ply->speed;
+		move_left(cub->ply, cub->map->map2d);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_D))
-		cub->ply->ply_y += cub->ply->plane_y * cub->ply->speed;
+		move_right(cub->ply, cub->map->map2d);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
+		rotate_left(cub->ply);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT))
-		
+		rotate_right(cub->ply);
 }

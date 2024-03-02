@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jessie <jessie@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/17 17:03:53 by jiajchen          #+#    #+#             */
-/*   Updated: 2024/02/29 17:50:44 by jessie           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   cub3d.h                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jessie <jessie@student.42.fr>                +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/02/17 17:03:53 by jiajchen      #+#    #+#                 */
+/*   Updated: 2024/03/02 17:08:42 by jiajchen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <libft.h>
 
 # define WIDTH 1920
-# define HEIGHT 1082
-# define TILE 30
+# define HEIGHT 1080
+# define TILE 64
 
 typedef struct s_texture
 {
@@ -53,7 +53,8 @@ typedef struct s_player
 	double		dir_y;
 	double		plane_x;
 	double		plane_y;
-	double		speed;
+	double		speed_m;
+	double		speed_r;
 }	t_player;
 
 typedef struct s_ray
@@ -74,7 +75,7 @@ typedef struct s_ray
 	int			line_h;
 	double		draw_start;
 	double		draw_end;
-	double		tex_x;
+	int			tex_x;
 	mlx_image_t	*wall_tex;
 }	t_ray;
 
@@ -92,8 +93,13 @@ typedef struct s_cub
 void	cast_ray(t_cub *cub);
 
 /* render */
-void	calculate_wall(t_cub *cub, t_ray *ray, int x);
-void	render_wall(t_cub *cub, t_ray *ray, int x);
-int		get_color(t_ray *ray, int y);
+void		calculate_wall(t_cub *cub, t_ray *ray);
+void		render_wall(t_cub *cub, t_ray *ray, int x);
+uint32_t	get_color(t_ray *ray, int y);
+
+/* move */
+void	move(t_cub *cub);
+void	rotate_left(t_player *ply);
+void	rotate_right(t_player *ply);
 
 #endif
