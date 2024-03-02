@@ -3,7 +3,7 @@ LIBFT	= ../libft/libft.a
 
 OBJ_DIR	= .obj
 
-SRCS = 	test.c parsing.c
+SRCS = 	test.c parsing.c parsing_map.c
 
 OBJS	= ${SRCS:%.c=$(OBJ_DIR)/%.o}
 

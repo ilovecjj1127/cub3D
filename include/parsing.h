@@ -6,7 +6,7 @@
 /*   By: jcaro <jcaro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:36:27 by jcaro             #+#    #+#             */
-/*   Updated: 2024/02/24 17:20:21 by jcaro            ###   ########.fr       */
+/*   Updated: 2024/03/02 19:19:47 by jcaro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@
 
 typedef struct s_map
 {
-	char		**map2d;
+	char		**map;
 	int			width;
-	int			height;
+	size_t		height;
 	int			start_x;
 	int			start_y;
+	char		direction;
 }	t_map;
 
 typedef struct s_textures
@@ -35,7 +36,9 @@ typedef struct s_textures
 	char	*ceiling;
 }	t_textures;
 
-int	read_textures(char *file, t_textures *textures);
-void	free_texture(t_textures *textures);
+int		read_textures(int fd, t_textures *textures);
+char	*no_new_line(char *with_new_line);
+void	free_array(char **arr);
+int		parse_map(int fd, char *file, t_map *map_data);
 
 #endif
