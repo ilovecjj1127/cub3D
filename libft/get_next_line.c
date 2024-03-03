@@ -6,14 +6,15 @@
 /*   By: jcaro <jcaro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 16:00:57 by jiajchen          #+#    #+#             */
-/*   Updated: 2024/02/24 19:48:18 by jcaro            ###   ########.fr       */
+/*   Updated: 2024/03/03 16:25:27 by jcaro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-#define BUFFER_SIZE 100000
-
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 100000
+# endif
 /* extract nextline from the line only before '\n' */
 char	*nextline_from_line(char *line)
 {
