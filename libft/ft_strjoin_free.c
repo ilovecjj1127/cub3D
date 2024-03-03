@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   ft_strjoin_free.c                                  :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jiajchen <jiajchen@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/12/12 11:45:07 by jiajchen      #+#    #+#                 */
-/*   Updated: 2023/12/15 14:29:48 by jiajchen      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   ft_strjoin_free.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jcaro <jcaro@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/12 11:45:07 by jiajchen          #+#    #+#             */
+/*   Updated: 2024/03/03 18:52:10 by jcaro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*ft_strjoin_free(char *s1, char *s2)
 /* free s1 and s2 */
 char	*ft_strjoin_free_d(char *s1, char *s2)
 {
-	char *sjoin;
+	char	*sjoin;
 
 	sjoin = ft_strjoin_free(s1, s2);
 	if (!sjoin)
