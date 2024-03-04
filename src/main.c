@@ -6,7 +6,7 @@
 /*   By: jiajchen <jiajchen@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/19 12:48:15 by jiajchen      #+#    #+#                 */
-/*   Updated: 2024/03/02 16:03:03 by jiajchen      ########   odam.nl         */
+/*   Updated: 2024/03/04 16:36:10 by jiajchen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,44 +42,31 @@ t_map	*init_map()
 	map->map2d[9] = NULL;
 	map->height = 9;
 	map->width = 25;
-	map->start_x = 2;
-	map->start_y = 13;
+	map->start_x = 13;
+	map->start_y = 2;
 	return (map);
 }
 
 void	init_textures(t_cub *cub)
 {
-	mlx_texture_t	*no;
-	mlx_texture_t	*so;
-	mlx_texture_t	*ea;
-	mlx_texture_t	*we;
-
-	no = mlx_load_png("./texture/eagle.png");
-	so = mlx_load_png("./texture/redbrick.png");
-	ea = mlx_load_png("./texture/bluestone.png");
-	we = mlx_load_png("./texture/purplestone.png");
-	cub->tex->no = mlx_texture_to_image(cub->mlx, no);
-	cub->tex->so = mlx_texture_to_image(cub->mlx, so);
-	cub->tex->ea = mlx_texture_to_image(cub->mlx, ea);
-	cub->tex->we = mlx_texture_to_image(cub->mlx, we);
-	mlx_delete_texture(no);
-	mlx_delete_texture(so);
-	mlx_delete_texture(ea);
-	mlx_delete_texture(we);
+	cub->tex->no = mlx_load_png("./texture/eagle.png");
+	cub->tex->so = mlx_load_png("./texture/redbrick.png");
+	cub->tex->ea = mlx_load_png("./texture/bluestone.png");
+	cub->tex->we = mlx_load_png("./texture/purplestone.png");
 	cub->tex->ceil = 0x3288bdff;
 	cub->tex->floor = 0x5e4fa2ff;
 }
 
 void	init_player(t_cub *cub)
 {
-	cub->ply->ply_x = cub->map->start_x + 0.5;
-	cub->ply->ply_y = cub->map->start_y + 0.5;
+	cub->ply->ply_x = cub->map->start_y + 0.5;
+	cub->ply->ply_y = cub->map->start_x + 0.5;
 	cub->ply->dir_x = -1;
 	cub->ply->dir_y = 0;
 	cub->ply->plane_x = 0;
 	cub->ply->plane_y = 0.66;
 	cub->ply->speed_m = 0.8;
-	cub->ply->speed_r = 0.1;
+	cub->ply->speed_r = 0.05;
 }
 
 t_cub	*init_cub(char *file)
@@ -102,6 +89,10 @@ t_cub	*init_cub(char *file)
 
 void	free_cub(t_cub *cub)
 {
+	mlx_delete_texture(cub->tex->no);
+	mlx_delete_texture(cub->tex->so);
+	mlx_delete_texture(cub->tex->ea);
+	mlx_delete_texture(cub->tex->we);
 	free_arr(cub->map->map2d);
 	free(cub->map);
 	free(cub->ray);

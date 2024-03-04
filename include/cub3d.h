@@ -6,7 +6,7 @@
 /*   By: jessie <jessie@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/17 17:03:53 by jiajchen      #+#    #+#                 */
-/*   Updated: 2024/03/02 17:08:42 by jiajchen      ########   odam.nl         */
+/*   Updated: 2024/03/04 16:39:36 by jiajchen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@
 
 typedef struct s_texture
 {
-	mlx_image_t	*no;
-	mlx_image_t	*so;
-	mlx_image_t	*we;
-	mlx_image_t	*ea;
+	mlx_texture_t	*no;
+	mlx_texture_t	*so;
+	mlx_texture_t	*we;
+	mlx_texture_t	*ea;
 	int			ceil;
 	int			floor;
 }	t_texture;
@@ -76,7 +76,7 @@ typedef struct s_ray
 	double		draw_start;
 	double		draw_end;
 	int			tex_x;
-	mlx_image_t	*wall_tex;
+	mlx_texture_t	*wall_tex;
 }	t_ray;
 
 typedef struct s_cub
@@ -91,14 +91,21 @@ typedef struct s_cub
 
 /* raycasting */
 void	cast_ray(t_cub *cub);
+void	init_ray(t_ray *ray, t_player *ply, int x);
+void	init_step(t_ray *ray, t_player *ply);
+void	perform_dda(t_cub *cub, t_ray *ray);
 
 /* render */
 void		calculate_wall(t_cub *cub, t_ray *ray);
 void		render_wall(t_cub *cub, t_ray *ray, int x);
-uint32_t	get_color(t_ray *ray, int y);
+uint32_t	get_color(t_ray *ray, int x, int y);
 
-/* move */
+/* move and rotate */
 void	move(t_cub *cub);
+void	move_forward(t_player *ply, char **map);
+void	move_backward(t_player *ply, char **map);
+void	move_left(t_player *ply, char **map);
+void	move_right(t_player *ply, char **map);
 void	rotate_left(t_player *ply);
 void	rotate_right(t_player *ply);
 

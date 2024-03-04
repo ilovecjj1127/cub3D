@@ -6,7 +6,7 @@
 /*   By: jiajchen <jiajchen@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/19 12:43:13 by jiajchen      #+#    #+#                 */
-/*   Updated: 2024/03/02 16:01:20 by jiajchen      ########   odam.nl         */
+/*   Updated: 2024/03/04 16:38:57 by jiajchen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 /**
  * check if a wall is hit 
  * @param side which side of the wall is hit
- * 0 is N/S wall; 1 is W/E
 */
 void	perform_dda(t_cub *cub, t_ray *ray)
 {

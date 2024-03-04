@@ -51,7 +51,7 @@ $(NAME): $(OBJ) $(HEADER) $(LIBFT) $(MLX)
 		cc $(OBJ) $(CFLAGS) $(LIB_CF) $(MLX_CF) -o $(NAME)
 		@echo "\n$(GREEN)$(NAME) created!$(DEFAULT)\n"
 
-$(MLX): $(MLX_PATH)
+$(MLX): $(MLX_DIR)
 		@echo "\n$(YELLOW)Generating MLX42 ...$(DEFAULT)\n"
 		@cmake $(MLX_DIR) -B $(MLX_PATH)
 		@make -C $(MLX_PATH) -j4

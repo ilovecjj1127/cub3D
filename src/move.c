@@ -6,7 +6,7 @@
 /*   By: jessie <jessie@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/28 12:12:11 by jiajchen      #+#    #+#                 */
-/*   Updated: 2024/03/02 12:59:55 by jiajchen      ########   odam.nl         */
+/*   Updated: 2024/03/04 16:32:26 by jiajchen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,20 @@ void	move_backward(t_player *ply, char **map)
 
 void	move_left(t_player *ply, char **map)
 {
-	if (map[(int)(ply->ply_x + ply->plane_x * ply->speed_m)][(int)ply->ply_y]
+	if (map[(int)(ply->ply_x - ply->plane_x * ply->speed_m)][(int)ply->ply_y]
 		!= '1')
 		ply->ply_x -= ply->plane_x * ply->speed_m;
-	if (map[(int)ply->ply_x][(int)(ply->plane_y + ply->dir_y * ply->speed_m)]
+	if (map[(int)ply->ply_x][(int)(ply->ply_y - ply->plane_y * ply->speed_m)]
 		!= '1')
 		ply->ply_y -= ply->plane_y * ply->speed_m;
 }
 
 void	move_right(t_player *ply, char **map)
 {
-	if (map[(int)(ply->ply_x - ply->plane_x * ply->speed_m)][(int)ply->ply_y]
+	if (map[(int)(ply->ply_x + ply->plane_x * ply->speed_m)][(int)ply->ply_y]
 		!= '1')
 		ply->ply_x += ply->plane_x * ply->speed_m;
-	if (map[(int)ply->ply_x][(int)(ply->plane_y - ply->dir_y * ply->speed_m)]
+	if (map[(int)ply->ply_x][(int)(ply->ply_y + ply->plane_y * ply->speed_m)]
 		!= '1')
 		ply->ply_y += ply->plane_y * ply->speed_m;
 }
