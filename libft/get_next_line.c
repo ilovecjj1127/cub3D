@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   get_next_line.c                                    :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jessie <jessie@student.42.fr>                +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/10/18 16:00:57 by jiajchen      #+#    #+#                 */
-/*   Updated: 2023/12/13 13:52:59 by jiajchen      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jcaro <jcaro@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/18 16:00:57 by jiajchen          #+#    #+#             */
+/*   Updated: 2024/03/03 18:51:35 by jcaro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-#define BUFFER_SIZE 100000
-
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 100000
+#endif
 /* extract nextline from the line only before '\n' */
 char	*nextline_from_line(char *line)
 {
@@ -89,13 +90,18 @@ char	*read_from_file(int fd, char *line)
 }
 
 /* combine the four helper function together */
-char	*get_next_line(int fd)
+char	*get_next_line(int fd, int free_buffer)
 {
 	static char	*line;
 	char		*next_line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
+	if (free_buffer && line != NULL)
+	{
+		free(line);
+		return (NULL);
+	}
 	line = read_from_file(fd, line);
 	if (!line)
 		return (NULL);
