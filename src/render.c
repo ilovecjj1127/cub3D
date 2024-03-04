@@ -6,7 +6,7 @@
 /*   By: jiajchen <jiajchen@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/24 15:28:53 by jiajchen      #+#    #+#                 */
-/*   Updated: 2024/03/02 17:12:13 by jiajchen      ########   odam.nl         */
+/*   Updated: 2024/03/02 17:18:00 by jiajchen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	calculate_wall(t_cub *cub, t_ray *ray)
 	double	wall_x;
 	
 	ray->line_h = (int)(HEIGHT / ray->wall_dist);	
-	ray->draw_start = ft_max(0, HEIGHT / 2 - cub->ray->line_h / 2);
-	ray->draw_end = ft_min(HEIGHT - 1, HEIGHT / 2 + cub->ray->line_h / 2);
+	ray->draw_start = ft_max(0, HEIGHT / 2 - ray->line_h / 2);
+	ray->draw_end = ft_min(HEIGHT - 1, HEIGHT / 2 + ray->line_h / 2);
 	if (ray->side == 0 && ray->raydir_x > 0)
 		ray->wall_tex = cub->tex->no;
 	else if (ray->side == 0 && ray->raydir_x < 0)
@@ -34,7 +34,8 @@ void	calculate_wall(t_cub *cub, t_ray *ray)
 		wall_x = cub->ply->ply_y + ray->wall_dist * ray->raydir_y;
 	else
 		wall_x = cub->ply->ply_x + ray->wall_dist * ray->raydir_x;
-	ray->tex_x = (int)(wall_x - floor(wall_x) * (double)TILE);
+	ray->tex_x = (int)(wall_x - floor(wall_x) * (double)TILE); //??????
+	// ray->tex_x = TILE - ray->tex_x - 1;
 }
 
 /* https://github.com/codam-coding-college/MLX42/blob/200a9e8535644bb23f0c798bd2c6d5869934f92d/src/mlx_put_pixel.c#L15 */
