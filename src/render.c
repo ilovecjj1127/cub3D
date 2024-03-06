@@ -6,7 +6,7 @@
 /*   By: jiajchen <jiajchen@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/24 15:28:53 by jiajchen      #+#    #+#                 */
-/*   Updated: 2024/03/04 16:05:07 by jiajchen      ########   odam.nl         */
+/*   Updated: 2024/03/06 15:19:58 by jiajchen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	calculate_wall(t_cub *cub, t_ray *ray)
 	ray->draw_start = ft_max(0, HEIGHT / 2 - ray->line_h / 2);
 	ray->draw_end = ft_min(HEIGHT - 1, HEIGHT / 2 + ray->line_h / 2);
 	if (ray->side == 0 && ray->raydir_x > 0)
-		ray->wall_tex = cub->tex->no;
-	else if (ray->side == 0 && ray->raydir_x < 0)
 		ray->wall_tex = cub->tex->so;
+	else if (ray->side == 0 && ray->raydir_x < 0)
+		ray->wall_tex = cub->tex->no;
 	else if (ray->side == 1 && ray->raydir_y > 0)
 		ray->wall_tex = cub->tex->ea;
 	else if (ray->side == 1 && ray->raydir_y < 0)
@@ -37,27 +37,6 @@ void	calculate_wall(t_cub *cub, t_ray *ray)
 	wall_x -= floor(wall_x);
 	ray->tex_x = (int)(wall_x * (double)TILE);
 }
-
-/* https://github.com/codam-coding-college/MLX42/blob/200a9e8535644bb23f0c798bd2c6d5869934f92d/src/mlx_put_pixel.c#L15 */
-// uint32_t	get_color(t_ray *ray, int y)
-// {
-// 	mlx_image_t	*tex;
-// 	uint8_t		*pixel;
-// 	int			x;
-// 	// int			r;
-// 	// int			g;
-// 	// int			b;
-// 	// int			a;
-	
-// 	x = ray->tex_x;
-// 	tex = ray->wall_tex;
-// 	pixel = &tex->pixels[(y * tex->width + x) * sizeof(int32_t)];
-// 	// r = pixel[0];
-// 	// g = pixel[1];
-// 	// b = pixel[2];
-// 	// a = pixel[3];
-// 	return (pixel[0] << 24 | pixel[1] << 16 | pixel[2] << 8 | pixel[3]);
-// }
 
 uint32_t	get_color(t_ray *ray, int x, int y)
 {
@@ -86,9 +65,9 @@ void	render_wall(t_cub *cub, t_ray *ray, int x)
 	while (++y < HEIGHT)
 	{
 		if (y < ray->draw_start)
-			mlx_put_pixel(cub->img, x, y, cub->tex->ceil);
+			mlx_put_pixel(cub->img, x, y, cub->tex->color_c);
 		else if (y > ray->draw_end)
-			mlx_put_pixel(cub->img, x, y, cub->tex->floor);
+			mlx_put_pixel(cub->img, x, y, cub->tex->color_f);
 		else
 		{
 			tex_y = (int)tex_pos & (TILE - 1);

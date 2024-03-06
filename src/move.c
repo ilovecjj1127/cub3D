@@ -6,7 +6,7 @@
 /*   By: jessie <jessie@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/28 12:12:11 by jiajchen      #+#    #+#                 */
-/*   Updated: 2024/03/04 16:32:26 by jiajchen      ########   odam.nl         */
+/*   Updated: 2024/03/04 17:17:36 by jiajchen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ void	move(t_cub *cub)
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(cub->mlx);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_W))
-		move_forward(cub->ply, cub->map->map2d);
+		move_forward(cub->ply, cub->map->map);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_S))
-		move_backward(cub->ply, cub->map->map2d);
+		move_backward(cub->ply, cub->map->map);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_A))
-		move_left(cub->ply, cub->map->map2d);
+		move_left(cub->ply, cub->map->map);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_D))
-		move_right(cub->ply, cub->map->map2d);
+		move_right(cub->ply, cub->map->map);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
 		rotate_left(cub->ply);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT))

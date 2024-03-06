@@ -6,7 +6,7 @@
 /*   By: jiajchen <jiajchen@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/19 12:43:13 by jiajchen      #+#    #+#                 */
-/*   Updated: 2024/03/04 16:38:57 by jiajchen      ########   odam.nl         */
+/*   Updated: 2024/03/06 14:58:56 by jiajchen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	perform_dda(t_cub *cub, t_ray *ray)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (cub->map->map2d[ray->map_x][ray->map_y] == '1')
+		if (cub->map->map[ray->map_x][ray->map_y] == '1')
 			hit = 1;
 	}
 	if (ray->side == 0)
@@ -75,8 +75,14 @@ void	init_ray(t_ray *ray, t_player *ply, int x)
 	ray->raydir_y = ply->dir_y + ply->plane_y * ray->cam_x;
 	ray->map_x = (int)ply->ply_x;
 	ray->map_y = (int)ply->ply_y;
-	ray->deltadt_x = fabs(1 / ray->raydir_x);
-	ray->deltadt_y = fabs(1 / ray->raydir_y);
+	if (ray->raydir_x == 0)
+		ray->deltadt_x = 1e30;
+	else
+		ray->deltadt_x = fabs(1 / ray->raydir_x);
+	if (ray->raydir_y == 0)
+		ray->deltadt_y = 1e30;
+	else
+		ray->deltadt_y = fabs(1 / ray->raydir_y);
 }
 
 void	cast_ray(t_cub *cub)
