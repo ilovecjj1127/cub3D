@@ -14,12 +14,12 @@
 
 /**
  * @param tex_x position on the texture
-*/
+ */
 void	calculate_wall(t_cub *cub, t_ray *ray)
 {
 	double	wall_x;
-	
-	ray->line_h = (int)(HEIGHT / ray->wall_dist);	
+
+	ray->line_h = (int)(HEIGHT / ray->wall_dist);
 	ray->draw_start = ft_max(0, HEIGHT / 2 - ray->line_h / 2);
 	ray->draw_end = ft_min(HEIGHT - 1, HEIGHT / 2 + ray->line_h / 2);
 	if (ray->side == 0 && ray->raydir_x > 0)
@@ -44,7 +44,7 @@ uint32_t	get_color(t_ray *ray, int x, int y)
 	int				g;
 	int				b;
 	mlx_texture_t	*t;
-	
+
 	t = ray->wall_tex;
 	r = t->pixels[(y * t->width + x) * t->bytes_per_pixel];
 	g = t->pixels[(y * t->width + x) * t->bytes_per_pixel + 1];

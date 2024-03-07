@@ -6,16 +6,16 @@
 /*   By: jiajchen <jiajchen@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/19 12:43:13 by jiajchen      #+#    #+#                 */
-/*   Updated: 2024/03/06 14:58:56 by jiajchen      ########   odam.nl         */
+/*   Updated: 2024/03/07 10:39:21 by jiajchen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
 /**
- * check if a wall is hit 
+ * check if a wall is hit
  * @param side which side of the wall is hit
-*/
+ */
 void	perform_dda(t_cub *cub, t_ray *ray)
 {
 	int	hit;
@@ -41,7 +41,7 @@ void	perform_dda(t_cub *cub, t_ray *ray)
 	if (ray->side == 0)
 		ray->wall_dist = ray->sidedt_x - ray->deltadt_x;
 	else
-		ray->wall_dist = ray->sidedt_y - ray->deltadt_y;	
+		ray->wall_dist = ray->sidedt_y - ray->deltadt_y;
 }
 
 void	init_step(t_ray *ray, t_player *ply)
@@ -87,7 +87,7 @@ void	init_ray(t_ray *ray, t_player *ply, int x)
 
 void	cast_ray(t_cub *cub)
 {
-	int		x;
+	int	x;
 
 	x = -1;
 	while (++x < WIDTH)

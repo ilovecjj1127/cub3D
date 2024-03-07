@@ -6,30 +6,18 @@
 /*   By: jiajchen <jiajchen@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/04 17:00:50 by jiajchen      #+#    #+#                 */
-/*   Updated: 2024/03/06 15:23:58 by jiajchen      ########   odam.nl         */
+/*   Updated: 2024/03/07 10:40:04 by jiajchen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-void	game_loop(void *param)
-{
-	t_cub	*cub;
-
-	cub = param;
-	mlx_delete_image(cub->mlx, cub->img);
-	cub->img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
-	cast_ray(cub);
-	move(cub);
-	mlx_image_to_window(cub->mlx, cub->img, 0, 0);
-}
-
 uint32_t	convert_color(char *str)
 {
-	int		r;
-	int		g;
-	int		b;
-	
+	int	r;
+	int	g;
+	int	b;
+
 	r = ft_atoi(str);
 	b = ft_atoi(ft_strchr(str, ',') + 1);
 	g = ft_atoi(ft_strchr(ft_strchr(str, ',') + 1, ',') + 1);
