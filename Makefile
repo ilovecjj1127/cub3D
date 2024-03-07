@@ -22,11 +22,24 @@ MLX_DIR		=	MLX42/
 MLX_H_PATH 	=	MLX42/include/
 MLX_PATH	=	MLX42/build/
 
-HEADER_FILE	=	fdf.h
+HEADER_FILE	=	cub3d.h
 HEADER_DIR	=	include/
 HEADER		=	$(addprefix $(HEADER_DIR), $(HEADER_FILE))
 
 SRC_FILES	=	main.c \
+				raycasting.c \
+				render.c \
+				move.c \
+				rotate.c \
+				init.c \
+				parsing/map_helpers.c \
+				parsing/map_validation.c \
+				parsing/parse_helpers.c \
+				parsing/parse_map.c \
+				parsing/parse_textures.c \
+				parsing/parsing.c \
+				parsing/texture_helpers.c \
+				parsing/texture_validation.c
 
 SRC_DIR		=	src/
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
@@ -36,18 +49,18 @@ OBJ			=	$(addprefix $(OBJ_DIR),$(SRC_FILES:%.c=%.o))
 
 
 # RULES
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c
-		@mkdir -p $(OBJ_DIR)
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADER) Makefile
+		@mkdir -p $(OBJ_DIR)/parsing/
 		cc $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 all: $(NAME)
-# $(MLX)
-$(NAME): $(OBJ) $(LIBFT)  
+
+$(NAME): $(OBJ)  $(LIBFT) $(MLX)
 		@echo "\n$(YELLOW)Generating $(NAME) executable...$(DEFAULT)\n"
 		cc $(OBJ) $(CFLAGS) $(LIB_CF) $(MLX_CF) -o $(NAME)
 		@echo "\n$(GREEN)$(NAME) created!$(DEFAULT)\n"
 
-$(MLX): $(MLX_PATH)
+$(MLX): $(MLX_DIR)
 		@echo "\n$(YELLOW)Generating MLX42 ...$(DEFAULT)\n"
 		@cmake $(MLX_DIR) -B $(MLX_PATH)
 		@make -C $(MLX_PATH) -j4
