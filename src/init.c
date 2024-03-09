@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   init.c                                             :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jiajchen <jiajchen@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2024/03/04 17:00:50 by jiajchen      #+#    #+#                 */
-/*   Updated: 2024/03/07 10:40:04 by jiajchen      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jcaro <jcaro@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/04 17:00:50 by jiajchen          #+#    #+#             */
+/*   Updated: 2024/03/09 12:53:03 by jcaro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,19 @@ t_cub	*init_cub(char *file)
 {
 	static t_cub	cub;
 
-	cub.mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
 	cub.map = ft_calloc(1, sizeof(t_map));
 	cub.tex = ft_calloc(1, sizeof(t_textures));
 	cub.ray = ft_calloc(1, sizeof(t_ray));
 	cub.ply = ft_calloc(1, sizeof(t_player));
-	if (!cub.mlx || !cub.map || !cub.tex || !cub.ply || !cub.ray)
-		free_cub(&cub, 1, "init failed");
 	if (parse_file(file, cub.map, cub.tex) == 0)
 		free_cub(&cub, 1, NULL);
+	cub.mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
+	if (!cub.mlx || !cub.map || !cub.tex || !cub.ply || !cub.ray)
+	{
+		if (cub.mlx)
+			mlx_terminate(cub.mlx);
+		free_cub(&cub, 1, "init failed");
+	}
 	load_textures(&cub);
 	init_player(&cub);
 	return (&cub);
@@ -80,7 +84,8 @@ void	free_cub(t_cub *cub, int ex, char *msg)
 		printf("%s\n", msg);
 	if (cub->map)
 	{
-		free_arr(cub->map->map);
+		if (!ex)
+			free_arr(cub->map->map);
 		free(cub->map);
 	}
 	if (cub->ply)
@@ -89,7 +94,8 @@ void	free_cub(t_cub *cub, int ex, char *msg)
 		free(cub->ray);
 	if (cub->tex)
 	{
-		free_texture(cub->tex);
+		if (!ex)
+			free_texture(cub->tex);
 		free(cub->tex);
 	}
 	if (ex)
