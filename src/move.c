@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   move.c                                             :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jessie <jessie@student.42.fr>                +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2024/02/28 12:12:11 by jiajchen      #+#    #+#                 */
-/*   Updated: 2024/03/07 10:40:43 by jiajchen      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   move.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jcaro <jcaro@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/28 12:12:11 by jiajchen          #+#    #+#             */
+/*   Updated: 2024/03/09 13:21:03 by jcaro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,10 @@ void	move(t_cub *cub)
 		move_right(cub->ply, cub->map->map);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
 		rotate_left(cub->ply);
+	if (mlx_is_mouse_down(cub->mlx, MLX_MOUSE_BUTTON_LEFT))
+		rotate_left(cub->ply);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT))
+		rotate_right(cub->ply);
+	if (mlx_is_mouse_down(cub->mlx, MLX_MOUSE_BUTTON_RIGHT))
 		rotate_right(cub->ply);
 }
