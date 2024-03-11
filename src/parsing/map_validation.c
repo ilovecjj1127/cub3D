@@ -6,7 +6,7 @@
 /*   By: jcaro <jcaro@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/03 18:08:28 by jcaro         #+#    #+#                 */
-/*   Updated: 2024/03/04 18:01:43 by jiajchen      ########   odam.nl         */
+/*   Updated: 2024/03/11 12:55:29 by jiajchen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,9 @@ static int	pos_is_surrounded(t_map *map_data, size_t row, size_t col)
 	while (i <= row + 1)
 	{
 		j = col - 1;
-		if (i != row && j != col)
+		while (j <= col + 1)
 		{
-			if (map[i][j] == ' ')
+			if (ft_strlen(map[i]) - 1 < j || map[i][j] == ' ')
 				return (0);
 			j++;
 		}

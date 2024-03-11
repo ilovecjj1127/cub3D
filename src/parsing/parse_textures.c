@@ -6,7 +6,7 @@
 /*   By: jcaro <jcaro@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/24 11:55:56 by jcaro         #+#    #+#                 */
-/*   Updated: 2024/03/04 18:01:57 by jiajchen      ########   odam.nl         */
+/*   Updated: 2024/03/11 11:50:56 by jiajchen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ static int	check_element_count(char **split)
 {
 	if (array_size(split) == 2)
 	{
-		if ((ft_strlen(split[0]) < 1 || ft_strlen(split[0]) > 2))
+		if (ft_strlen(split[0]) < 1 || \
+			(ft_strncmp("NO", split[0], 3) && ft_strncmp("SO", split[0], 3) \
+			&& ft_strncmp("EA", split[0], 3) && ft_strncmp("WE", split[0], 3) \
+			&& ft_strncmp("F", split[0], 2) && ft_strncmp("C", split[0], 2)))
 		{
 			free_array(split);
 			return (printf("Error\nWrong format\n"), 0);
