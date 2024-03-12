@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jcaro <jcaro@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/04 17:00:50 by jiajchen          #+#    #+#             */
-/*   Updated: 2024/03/09 12:53:03 by jcaro            ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   init.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jcaro <jcaro@student.42.fr>                  +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/03/04 17:00:50 by jiajchen      #+#    #+#                 */
+/*   Updated: 2024/03/12 14:58:29 by jiajchen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,15 @@ void	init_player(t_cub *cub)
 	if (cub->map->direction == 'E')
 		cub->ply->dir_y = 1;
 	cub->ply->plane_x = 0;
-	cub->ply->plane_y = 0.66;
+	cub->ply->plane_y = 0;
+	if (cub->map->direction == 'N')
+		cub->ply->plane_y = 0.66;
+	if (cub->map->direction == 'S')
+		cub->ply->plane_y = -0.66;
+	if (cub->map->direction == 'W')
+		cub->ply->plane_x = -0.66;
+	if (cub->map->direction == 'E')
+		cub->ply->plane_x = 0.66;
 	cub->ply->speed_m = 0.5;
 	cub->ply->speed_r = 0.05;
 }
